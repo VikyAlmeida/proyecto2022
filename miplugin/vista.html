@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+    
+</head>
+<body>
+    <div class="container" >
+        <div class="html"> 
+            <div class="codigoHTML">
+                <h2>HTML</h2>
+                <textarea name="codeHTML" id="codeHTML" cols="30" rows="10" id="codigoHTML" disabled></textarea>
+            </div>
+        </div>
+        <div class="css">
+            <div class="codigoCSS">
+                <h2>CSS</h2>
+                <textarea name="codeCSS" id="codeCSS" cols="30" rows="10" id="codigoCSS" disabled></textarea>
+            </div>
+        </div>
+        <div class="preview">
+            <div class="view">
+                <h2>PREVIEW</h2>
+                <div class="design" id ="design">
+                    <div id="anadir" onclick="capas()">+</div>
+                </div>
+            </div>
+        </div>
+        <div class="elements">
+            
+            <div id="pestanas">
+                <ul id=lista>
+                    <div id="pestanas">
+                        <ul id=lista>
+                            <li id="pestana1"><a href='javascript:cambiarPestanna(pestanas,pestana1);'>HTML</a></li>
+                            <li id="pestana2"><a href='javascript:cambiarPestanna(pestanas,pestana2);'>JS</a></li>
+                        </ul>
+                    </div>
+                    <div id="contenidopestanas">
+                        <div id="cpestana1">
+                            <select class="selectHTML" name = "element" size = "8" multiple = "multiple" >
+                                <script>
+                                    elementHTML.map((element) => {
+                                        document.write('<option onclick="cadena('+"'"+element.titulo+"'"+')" value = "'+element.elementoHTML+'">'+element.titulo+'</option>');}
+                                    );
+                                </script>
+                            </select>
+                        </div>
+                        <div id="cpestana2" style="display:none;">
+                            El nombre hojas de estilo en cascada viene del inglés Cascading Style Sheets, del que toma sus siglas. CSS es un lenguaje usado para definir la presentación de un documento estructurado escrito en HTML o XML2 (y por extensión en XHTML). El W3C (World Wide Web Consortium) es el encargado de formular la especificación de las hojas de estilo que servirán de estándar para los agentes de usuario o navegadores.
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="botones">
+            <button onclick="borrar()">Cancelar</button>
+            <button onclick="borrar()">Restaurar</button>
+            <button onclick="borrar()">Guardar</button>
+        </div>
+    </div>
+    
+    <div style="background-color:blue;">Insertar aqui</div>
+</body>
+</html>
