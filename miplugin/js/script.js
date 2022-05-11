@@ -4,7 +4,6 @@ var elementHTML = [
                     {titulo:"imagen",elementoHTML:"<img src=''>"},
 ];
 var optionDIVSELECTED = 0;// 0 -> no hay optionDiv 1-> hay optionDiv
-
 var optionDiv = "<div id='optionDiv'>";
     optionDiv += "<div id='form1' onclick='SelectorCapas(1)'></div>";
     optionDiv += "<div id='form2' onclick='SelectorCapas(2)'><div></div></div>";
@@ -12,6 +11,7 @@ var optionDiv = "<div id='optionDiv'>";
     optionDiv += "<div id='form4' onclick='SelectorCapas(4)'><div></div></div>";
     optionDiv += "</div>";
 var contadorDeElementos = 0;
+var capasCadena = "";
 let capas = () => {
     if(!optionDIVSELECTED){
         let codeHTML = document.getElementById("design");
@@ -21,30 +21,34 @@ let capas = () => {
 };
 let SelectorCapas = (form) => {
     if (contadorDeElementos<=8) {    
+        const capaanadir = "<div id='anadir' onclick='capas()'>+</div>";
         let preview = document.getElementById("design");
         let codeHTML = document.getElementById("codeHTML");
         let codeCSS = document.getElementById("codeCSS");
         switch (form){
             case 1:
-                let cadena = "<div id='Seleccionado' style='margin-bottom:0.5em;'>Inserta aqui</div>";
-                preview.innerHTML = cadena +preview.innerHTML;
-                codeHTML.innerHTML = "<div id='Seleccionado'></div>";
-                codeCSS.innerHTML = "";
+                const capa1 = "<div id='CapaSeleccionada' style='margin-bottom:0.5em;'><div id='Seleccionado' style='border:0px;'>Inserta aqui</div></div>";
+                capasCadena += capa1;
+                preview.innerHTML = capasCadena + capaanadir;
+                codeCSS.innerHTML += "";
+                console.log(capasCadena);
             break;
         }
         contadorDeElementos++;
     }
 };
-
 let cadena = (title) => {
     const HTML = elementHTML.filter(element => {
         if (element.titulo === title) return element
     });
     let codeHTML = document.getElementById("codeHTML");
-    let capaSeleccionada = document.getElementById("Seleccionado");
-    capaSeleccionada.innerHTML = HTML[0].elementoHTML;
-    console.log(capaSeleccionada);
-    codeHTML.innerHTML = capaSeleccionada.toString();
+    let capaSeleccionada = document.getElementById("CapaSeleccionada");
+    let Seleccionada = document.getElementById("Seleccionado");
+    Seleccionada.innerHTML = HTML[0].elementoHTML;
+    codeHTML.innerHTML += capaSeleccionada.innerHTML;
+    Seleccionada.id = "";
+    optionDIVSELECTED = 0;
+    capasCadena = capaSeleccionada.innerHTML;
 };
 
 

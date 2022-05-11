@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v3"></script> -->
+   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA24iWfJspnvppQRBolafoPUG1Isv-uQNo"></script>
+</head>
+<body>
+    <h1>Mapa</h1>
+    <div id="mapa" style="width: 700px;height: 500px;">
+
+    </div>
+    <script type="text/javascript">
+        const AYAMONTE_LAT = 37.21452745236583;
+        const AYAMONTE_LON = -7.4090030153786754;
+        //https://console.cloud.google.com/apis/enableflow?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true&project=proyecto2022-349917
+        let contentMAPA = document.getElementById("mapa");
+        navigator.geolocation.getCurrentPosition(fn_ok,fn_mal);
+        function fn_mal(){}
+        function fn_ok(rta){
+            let lat = rta.coords.latitude;
+            let lon = rta.coords.longitude;
+            let gLatLon1 = new google.maps.LatLng(lat,lon);
+            let gLatLon2 = new google.maps.LatLng(AYAMONTE_LAT,AYAMONTE_LON);
+            //CREO EL MAPA CENTRADO EN MI UBICACION
+            const objConfig = {
+                zoom:17,
+                center:gLatLon1
+            };
+            let gMapa = new google.maps.Map(contentMAPA,objConfig);
+            //PONEMOS LOS ICONOS DE LA UBICACION EL 1 ES LA MIA EL 2 ES EL AYUNTAMIENTO DE AYAMONTE
+            const objConfigMarker1 = {
+                position: gLatLon1,
+                map:gMapa,
+                title: "Usted esta aca"
+            };
+            let gMarker1 = new google.maps.Marker( objConfigMarker1 );
+            const objConfigMarker2 = {
+                position: gLatLon2,
+                map:gMapa,
+                title: "Ayuntamiento de ayamonte"
+            };
+            let gMarker2 = new google.maps.Marker( objConfigMarker2 );
+            //TRAZAMOS LA RUTA
+            const objConfigDr = {
+                map:gMapa
+            };
+            const objConfigDs = {
+                origin: gLatLon1,
+                destination: gLatLon2,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            console.log(google.maps);
+            let ds = new google.maps.DirectionsService( );
+            let dr = new google.maps.DirectionsRenderer( objConfigDr );
+
+            ds.route(objConfigDs, fnRutear);
+            function fnRutear( resultados, status ){
+                //mostrar la linea entre a y b
+                if( status == "OK" ){
+                    directionsRenderer.setDirections( resultados );
+                } else {
+              window.alert("Directions request failed due to " + status);
+            }
+            }
+        }
+        
+    </script>
+</body>
+</html>
