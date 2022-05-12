@@ -42,7 +42,7 @@ ul,ol{
 .menu > li > a:hover{
     padding: 10px;
     text-decoration:none;
-    color:
+    color: blue;
 }
 .menu li ul { 
     display: none;
