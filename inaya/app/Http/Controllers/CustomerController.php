@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function index(){
+        return view('customers.index');
+    }
     public function create(Request $request){
         $this->validate($request,[
         'name' => ['required','min:3'],

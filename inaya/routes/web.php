@@ -6,6 +6,7 @@ use App\Http\Controllers\welcomeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::get('/como-llegar', [welcomeController::class ,"como_llegar"])->name("com
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/ZonaCliente', [CustomerController::class, 'index'])->name('cliente.index');
 
 Route::middleware(["auth","admin"])->prefix("/admin")->namespace("Admin")->group(function(){
     Route::get('/', [AdminController::class ,"index"])->name("admin.index");
@@ -38,4 +40,10 @@ Route::middleware(["auth","admin"])->prefix("/admin")->namespace("Admin")->group
     Route::get('/request', [UserController::class ,"request"])->name("admin.request");
     Route::post('/request', [UserController::class ,"accept"])->name("admin.accept.customer");
     
+    Route::get('/events', [EventController::class ,"index"])->name("admin.events.index");
+    Route::get('/events/create', [EventController::class ,"create"])->name("admin.events.create");
+    Route::get('/events/edit/{event}', [EventController::class ,"edit"])->name("admin.events.edit");
+    Route::post('/events/edit', [EventController::class ,"update"])->name("admin.events.update");
+    Route::post('/events/create', [EventController::class ,"store"])->name("admin.events.store");
+    Route::delete('/events', [EventController::class ,"destroy"])->name("admin.events.destroy");
 });

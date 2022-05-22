@@ -25,7 +25,8 @@ class HomeController extends Controller
     {
         if(auth()->user()->tipo === "administrador"){
             return redirect('/admin');
+        }else{
+            return redirect('/ZonaCliente');
         }
-        return redirect('/home');
     }
 }
